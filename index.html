@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HABO Einkaufskiosk | Schnell. Nah. Klar.</title>
+  <meta
+    name="description"
+    content="HABO Einkaufskiosk – Getränke, Snacks, Eis, Paketshop und schnelle Einkäufe im Viertel. Klar präsentiert, modern aufgebaut und direkt verständlich."
+  />
+  <style>
+    :root {
+      --bg: #f4f1e8;
+      --surface: #fbf8f1;
+      --surface-2: #ebe4d6;
+      --line: #d4ccbe;
+      --line-strong: #bcb19f;
+      --text: #121212;
+      --muted: #5f5a52;
+      --accent: #d85c2f;
+      --accent-dark: #b9481f;
+      --max-width: 1320px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .container {
+      width: min(var(--max-width), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(244, 241, 232, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(18, 18, 18, 0.08);
+    }
+
+    .topbar-inner {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 14px;
+      height: 14px;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .brand-copy {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.05;
+    }
+
+    .brand-copy strong {
+      font-size: 1rem;
+      letter-spacing: 0.01em;
+    }
+
+    .brand-copy span {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      flex-wrap: wrap;
+    }
+
+    .nav a {
+      font-size: 0.94rem;
+      color: var(--muted);
+      position: relative;
+      padding: 3px 0;
+      transition: color 0.2s ease;
+    }
+
+    .nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -3px;
+      width: 0;
+      height: 1px;
+      background: var(--text);
+      transition: width 0.2s ease;
+    }
+
+    .nav a:hover {
+      color: var(--text);
+    }
+
+    .nav a:hover::after {
+      width: 100%;
+    }
+
+    .hero {
+      padding: 34px 0 0;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.02fr 0.98fr;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      min-height: calc(100vh - 120px);
+    }
+
+    .hero-left,
+    .hero-right {
+      min-width: 0;
+    }
+
+    .hero-left {
+      padding: 42px 34px 38px 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 26px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 30px;
+      height: 1px;
+      background: var(--accent);
+      display: block;
+    }
+
+    .hero-title {
+      font-size: clamp(3.2rem, 8vw, 7rem);
+      line-height: 0.92;
+      letter-spacing: -0.06em;
+      max-width: 760px;
+    }
+
+    .hero-text {
+      max-width: 640px;
+      margin-top: 26px;
+      font-size: 1.06rem;
+      color: var(--muted);
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 34px;
+    }
+
+    .btn {
+      min-height: 52px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 22px;
+      border: 1px solid var(--text);
+      border-radius: 0;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: var(--text);
+      color: #ffffff;
+      border-color: var(--text);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border-color: rgba(18, 18, 18, 0.18);
+    }
+
+    .hero-meta {
+      margin-top: 54px;
+      border-top: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .hero-meta-item {
+      padding: 18px 18px 0 0;
+    }
+
+    .hero-meta-item span {
+      display: block;
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.11em;
+      color: var(--muted);
+      margin-bottom: 7px;
+    }
+
+    .hero-meta-item strong {
+      display: block;
+      font-size: 1.04rem;
+      line-height: 1.3;
+    }
+
+    .hero-right {
+      border-left: 1px solid var(--line);
+      display: grid;
+      grid-template-rows: 1fr auto;
+    }
+
+    .hero-image-wrap {
+      position: relative;
+      min-height: 540px;
+      overflow: hidden;
+    }
+
+    .hero-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-image-label {
+      position: absolute;
+      left: 22px;
+      bottom: 22px;
+      background: rgba(251, 248, 241, 0.94);
+      border: 1px solid rgba(18, 18, 18, 0.1);
+      padding: 12px 14px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-info {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid var(--line);
+    }
+
+    .hero-info-block {
+      padding: 24px;
+      min-height: 150px;
+    }
+
+    .hero-info-block + .hero-info-block {
+      border-left: 1px solid var(--line);
+    }
+
+    .hero-info-block span {
+      display: block;
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .hero-info-block strong {
+      display: block;
+      font-size: 1.18rem;
+      margin-bottom: 8px;
+    }
+
+    .hero-info-block p {
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .service-logos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-top: 14px;
+    }
+
+    .service-logo-box {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 96px;
+      min-height: 52px;
+      padding: 8px 12px;
+      background: rgba(255, 255, 255, 0.45);
+      border: 1px solid var(--line);
+    }
+
+    .service-logo-box img {
+      max-width: 72px;
+      max-height: 28px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .section {
+      padding: 0;
+    }
+
+    .section + .section {
+      border-top: 1px solid var(--line);
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: 0.34fr 0.66fr;
+      gap: 0;
+    }
+
+    .section-left {
+      padding: 34px 26px 34px 0;
+      border-right: 1px solid var(--line);
+    }
+
+    .section-right {
+      padding: 34px 0 34px 32px;
+    }
+
+    .section-kicker {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3.6rem);
+      line-height: 0.96;
+      letter-spacing: -0.05em;
+      max-width: 300px;
+    }
+
+    .section-copy {
+      margin-top: 18px;
+      max-width: 300px;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+    }
+
+    .gallery-main {
+      min-height: 520px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: var(--surface-2);
+    }
+
+    .gallery-main img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .gallery-side {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .gallery-side-item {
+      min-height: 250px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: var(--surface-2);
+    }
+
+    .gallery-side-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .rows {
+      border-top: 1px solid var(--line);
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 220px 1fr 180px;
+      gap: 28px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--line);
+      align-items: start;
+    }
+
+    .row-label {
+      font-size: 1.22rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .row-text {
+      color: var(--muted);
+      max-width: 720px;
+      font-size: 0.98rem;
+    }
+
+    .row-note {
+      justify-self: end;
+      text-align: right;
+      color: var(--text);
+      font-weight: 700;
+      font-size: 0.94rem;
+    }
+
+    .row-logos {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .row-logos img {
+      max-width: 74px;
+      max-height: 28px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      background: rgba(255, 255, 255, 0.45);
+      border: 1px solid var(--line);
+      padding: 8px 10px;
+    }
+
+    .offers-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .offer-main {
+      padding: 32px 34px 34px 0;
+      border-right: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 420px;
+    }
+
+    .offer-main-top span {
+      display: inline-block;
+      font-size: 0.77rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .offer-main-top h3 {
+      font-size: clamp(2.3rem, 5vw, 4.6rem);
+      line-height: 0.94;
+      letter-spacing: -0.05em;
+      max-width: 530px;
+      margin-bottom: 18px;
+    }
+
+    .offer-main-top p {
+      max-width: 620px;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .offer-price {
+      margin-top: 28px;
+      font-size: 4rem;
+      line-height: 0.92;
+      letter-spacing: -0.06em;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .offer-side {
+      display: grid;
+      grid-template-rows: repeat(3, 1fr);
+    }
+
+    .offer-side-item {
+      padding: 26px 0 26px 30px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .offer-side-item:last-child {
+      border-bottom: none;
+    }
+
+    .offer-side-item span {
+      display: block;
+      font-size: 0.77rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .offer-side-item strong {
+      display: block;
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+    }
+
+    .offer-side-item p {
+      color: var(--muted);
+      font-size: 0.96rem;
+      max-width: 420px;
+    }
+
+    .hours-layout {
+      border-top: 1px solid var(--line);
+    }
+
+    .hours-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 1rem;
+    }
+
+    .hours-row span {
+      color: var(--muted);
+    }
+
+    .hours-row strong {
+      font-size: 1.04rem;
+    }
+
+    .hours-row-logos {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .hours-row-logos img {
+      max-width: 72px;
+      max-height: 28px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      background: rgba(255, 255, 255, 0.45);
+      border: 1px solid var(--line);
+      padding: 8px 10px;
+    }
+
+    .location-layout {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 0;
+      border-top: 1px solid var(--line);
+      min-height: 460px;
+    }
+
+    .location-copy {
+      padding: 32px 34px 34px 0;
+      border-right: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .location-copy h3 {
+      font-size: 2rem;
+      line-height: 0.98;
+      letter-spacing: -0.04em;
+      margin-bottom: 18px;
+    }
+
+    .location-copy p {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 460px;
+    }
+
+    .location-meta {
+      margin-top: 32px;
+      border-top: 1px solid var(--line);
+    }
+
+    .location-meta-item {
+      padding: 16px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .location-meta-item span {
+      display: block;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .location-meta-item strong {
+      display: block;
+      font-size: 1.08rem;
+      line-height: 1.4;
+    }
+
+    .location-service-logos {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .location-service-logos img {
+      max-width: 74px;
+      max-height: 28px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      background: rgba(255, 255, 255, 0.45);
+      border: 1px solid var(--line);
+      padding: 8px 10px;
+    }
+
+    .map {
+      overflow: hidden;
+      min-height: 460px;
+      background: var(--surface-2);
+    }
+
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 22px 0 34px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 1100px) {
+      .hero-grid,
+      .section-grid,
+      .offers-grid,
+      .location-layout,
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-side {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hero-right,
+      .section-left,
+      .offer-main,
+      .location-copy {
+        border-left: none;
+        border-right: none;
+      }
+
+      .section-left {
+        padding-right: 0;
+        border-right: none;
+        padding-bottom: 12px;
+      }
+
+      .section-right {
+        padding-left: 0;
+        padding-top: 8px;
+      }
+
+      .hero-left {
+        padding-right: 0;
+      }
+
+      .hero-right {
+        border-left: none;
+        border-top: 1px solid var(--line);
+      }
+
+      .offer-main {
+        padding-right: 0;
+        min-height: auto;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .offer-side-item {
+        padding-left: 0;
+      }
+
+      .location-copy {
+        padding-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .row {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .row-note {
+        justify-self: start;
+        text-align: left;
+      }
+    }
+
+    @media (max-width: 820px) {
+      .topbar-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 14px 0;
+      }
+
+      .nav {
+        gap: 18px;
+      }
+
+      .hero {
+        padding-top: 20px;
+      }
+
+      .hero-left {
+        padding-top: 28px;
+      }
+
+      .hero-title {
+        font-size: 2.9rem;
+      }
+
+      .hero-meta,
+      .hero-info,
+      .gallery-side {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-info-block + .hero-info-block {
+        border-left: none;
+        border-top: 1px solid var(--line);
+      }
+
+      .hours-row {
+        grid-template-columns: 1fr;
+      }
+
+      .hours-row-logos {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .container {
+        width: min(var(--max-width), calc(100% - 22px));
+      }
+
+      .hero-left,
+      .section-left,
+      .section-right,
+      .offer-main,
+      .location-copy {
+        padding-top: 24px;
+        padding-bottom: 24px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .row {
+        padding: 18px 0;
+      }
+
+      .hero-image-wrap,
+      .gallery-main,
+      .gallery-side-item,
+      .map {
+        min-height: 260px;
+      }
+
+      .offer-price {
+        font-size: 2.9rem;
+      }
+
+      .service-logo-box,
+      .row-logos img,
+      .hours-row-logos img,
+      .location-service-logos img {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="#" class="brand">
+        <div class="brand-mark"></div>
+        <div class="brand-copy">
+          <strong>HABO Einkaufskiosk</strong>
+          <span>Frankfurt · Schnell. Nah. Klar.</span>
+        </div>
+      </a>
+
+      <nav class="nav">
+        <a href="#eindruck">Eindruck</a>
+        <a href="#sortiment">Sortiment</a>
+        <a href="#services">Services</a>
+        <a href="#angebote">Angebote</a>
+        <a href="#zeiten">Öffnungszeiten</a>
+        <a href="#standort">Standort</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-left">
+          <div>
+            <div class="eyebrow">Lokaler Kiosk. Klar präsentiert.</div>
+            <h1 class="hero-title">Direkt im Viertel. Schnell gefunden. Sofort vertraut.</h1>
+            <p class="hero-text">
+              Ein Kiosk braucht keine überladene Website. Er braucht eine Seite, die sofort zeigt,
+              wo der Laden ist, was es dort gibt und warum es sich lohnt vorbeizukommen.
+              Dazu gehören heute nicht nur Getränke und Snacks, sondern auch Paketservices, die
+              gezielt zusätzliche Laufkundschaft bringen.
+            </p>
+
+            <div class="hero-actions">
+              <a href="#eindruck" class="btn btn-primary">Laden ansehen</a>
+              <a href="#standort" class="btn btn-secondary">Standort prüfen</a>
+            </div>
+          </div>
+
+          <div class="hero-meta">
+            <div class="hero-meta-item">
+              <span>Fokus</span>
+              <strong>Mehr Sichtbarkeit für echte Laufkundschaft</strong>
+            </div>
+            <div class="hero-meta-item">
+              <span>Nutzen</span>
+              <strong>Sortiment, Services, Zeiten und Kontakt sofort sichtbar</strong>
+            </div>
+            <div class="hero-meta-item">
+              <span>Wirkung</span>
+              <strong>Wirkt wie ein echter Laden und nicht wie ein Baukasten</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="hero-image-wrap">
+            <img
+              src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1600&q=80"
+              alt="Modernes Geschäft mit Getränken und Sortiment"
+            />
+            <div class="hero-image-label">HABO Einkaufskiosk</div>
+          </div>
+
+          <div class="hero-info">
+            <div class="hero-info-block">
+              <span>Öffnungszeiten</span>
+              <strong>Mo – So 12:00 – 00:00</strong>
+              <p>Direkt sichtbar, ohne Suchen und ohne unnötige Klicks.</p>
+            </div>
+
+            <div class="hero-info-block">
+              <span>Services</span>
+              <strong>DHL, DPD & GLS</strong>
+              <p>Mehr als nur Kiosk: Pakete abgeben, abholen und Wege sparen.</p>
+
+              <div class="service-logos">
+                <div class="service-logo-box">
+                  <img src="dhl-logo.png" alt="DHL Logo" />
+                </div>
+                <div class="service-logo-box">
+                  <img src="dpd-logo.png" alt="DPD Logo" />
+                </div>
+                <div class="service-logo-box">
+                  <img src="gls-logo.png" alt="GLS Logo" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="eindruck">
+      <div class="container section-grid">
+        <div class="section-left">
+          <div class="section-kicker">Eindruck</div>
+          <h2 class="section-title">Der Laden muss sichtbar echt wirken.</h2>
+          <p class="section-copy">
+            Gute Bilder machen hier mehr aus als jedes Feature-Blabla. Der erste Eindruck muss
+            direkt nach echtem Laden, echtem Sortiment und echtem Nutzen aussehen.
+          </p>
+        </div>
+
+        <div class="section-right">
+          <div class="gallery-grid">
+            <div class="gallery-main">
+              <img
+                src="https://images.unsplash.com/photo-1516594798947-e65505dbb29d?auto=format&fit=crop&w=1400&q=80"
+                alt="Innenansicht eines kleinen Geschäfts mit Sortiment"
+              />
+            </div>
+
+            <div class="gallery-side">
+              <div class="gallery-side-item">
+                <img
+                  src="https://images.unsplash.com/photo-1604719312566-8912e9c8a213?auto=format&fit=crop&w=900&q=80"
+                  alt="Kühlregal mit Getränken"
+                />
+              </div>
+
+              <div class="gallery-side-item">
+                <img
+                  src="https://images.unsplash.com/photo-1585238342024-78d387f4a707?auto=format&fit=crop&w=900&q=80"
+                  alt="Regal mit Snacks und Süßwaren"
+                />
+              </div>
+
+              <div class="gallery-side-item">
+                <img
+                  src="https://images.unsplash.com/photo-1578303512597-81e6cc155b3e?auto=format&fit=crop&w=900&q=80"
+                  alt="Warenregal in einem kleinen Laden"
+                />
+              </div>
+
+              <div class="gallery-side-item">
+                <img
+                  src="https://images.unsplash.com/photo-1488459716781-31db52582fe9?auto=format&fit=crop&w=900&q=80"
+                  alt="Straßenszene in einem Stadtviertel"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="sortiment">
+      <div class="container section-grid">
+        <div class="section-left">
+          <div class="section-kicker">Sortiment</div>
+          <h2 class="section-title">Alles da, was man schnell braucht.</h2>
+          <p class="section-copy">
+            Keine unnötigen Boxen. Lieber klare Reihen mit echtem Informationswert.
+            Das wirkt sauberer, erwachsener und glaubwürdiger.
+          </p>
+        </div>
+
+        <div class="section-right">
+          <div class="rows">
+            <div class="row">
+              <div class="row-label">Getränke</div>
+              <div class="row-text">
+                Kalte Softdrinks, Wasser, Energy, Säfte und weitere typische To-go-Produkte für
+                unterwegs oder den schnellen Einkauf zwischendurch.
+              </div>
+              <div class="row-note">Schnell griffbereit</div>
+            </div>
+
+            <div class="row">
+              <div class="row-label">Snacks</div>
+              <div class="row-text">
+                Chips, Schokolade, Süßwaren und kleine Snacks für den spontanen Hunger oder einfach
+                für unterwegs.
+              </div>
+              <div class="row-note">Für zwischendurch</div>
+            </div>
+
+            <div class="row">
+              <div class="row-label">Eis & Kühlung</div>
+              <div class="row-text">
+                Gerade im Sommer ein echter Grund für Laufkundschaft. Sichtbar gezeigt verkauft
+                dieser Bereich deutlich besser als nur irgendwo versteckt erwähnt.
+              </div>
+              <div class="row-note">Saisonal stark</div>
+            </div>
+
+            <div class="row">
+              <div class="row-label">Alltag & Spontankauf</div>
+              <div class="row-text">
+                Genau die Dinge, für die man nicht extra in einen großen Markt will. Praktisch,
+                direkt im Viertel und ohne Umwege erreichbar.
+              </div>
+              <div class="row-note">Nah & praktisch</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="container section-grid">
+        <div class="section-left">
+          <div class="section-kicker">Services</div>
+          <h2 class="section-title">Mehr als nur ein Kiosk.</h2>
+          <p class="section-copy">
+            Genau solche Zusatzservices machen lokal einen Unterschied. Wer Pakete abgibt oder
+            abholt, kauft oft nebenbei gleich mit ein.
+          </p>
+        </div>
+
+        <div class="section-right">
+          <div class="rows">
+            <div class="row">
+              <div class="row-label">DHL</div>
+              <div class="row-text">
+                Pakete bequem abgeben oder abholen, direkt im Viertel und ohne zusätzlichen Umweg.
+                <div class="row-logos">
+                  <img src="dhl-logo.png" alt="DHL Logo" />
+                </div>
+              </div>
+              <div class="row-note">Schnell erledigt</div>
+            </div>
+
+            <div class="row">
+              <div class="row-label">DPD</div>
+              <div class="row-text">
+                Praktischer Paketservice für den Alltag. Ideal für alle, die ihre Wege kurz halten wollen.
+                <div class="row-logos">
+                  <img src="dpd-logo.png" alt="DPD Logo" />
+                </div>
+              </div>
+              <div class="row-note">Direkt vor Ort</div>
+            </div>
+
+            <div class="row">
+              <div class="row-label">GLS</div>
+              <div class="row-text">
+                Noch ein klarer Mehrwert, der den Laden online sofort interessanter und nützlicher macht.
+                <div class="row-logos">
+                  <img src="gls-logo.png" alt="GLS Logo" />
+                </div>
+              </div>
+              <div class="row-note">Mehr Kundenfluss</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="angebote">
+      <div class="container section-grid">
+        <div class="section-left">
+          <div class="section-kicker">Angebote</div>
+          <h2 class="section-title">Der Bereich, der tatsächlich verkauft.</h2>
+          <p class="section-copy">
+            Nicht viel reden. Klare Angebote zeigen. Genau das bringt Leute von Google oder vom
+            Handy tatsächlich in den Laden.
+          </p>
+        </div>
+
+        <div class="section-right">
+          <div class="offers-grid">
+            <article class="offer-main">
+              <div class="offer-main-top">
+                <span>Wochenhighlight</span>
+                <h3>2 Energy Drinks für 3,50 €</h3>
+                <p>
+                  So müssen Angebote aussehen: direkt verständlich, schnell erfassbar und ohne
+                  jeden Werbe-Kitsch.
+                </p>
+              </div>
+
+              <div class="offer-price">3,50 €</div>
+            </article>
+
+            <div class="offer-side">
+              <div class="offer-side-item">
+                <span>Kombi</span>
+                <strong>Snack + Drink</strong>
+                <p>Perfekt für Schüler, Berufstätige und spontane Laufkundschaft im Viertel.</p>
+              </div>
+
+              <div class="offer-side-item">
+                <span>Saison</span>
+                <strong>Eis & kalte Getränke</strong>
+                <p>Gerade im Sommer ein echter Trigger für schnelle Kaufentscheidungen.</p>
+              </div>
+
+              <div class="offer-side-item">
+                <span>Stammkunden</span>
+                <strong>Regelmäßig neue Deals</strong>
+                <p>So bleibt die Seite lebendig und wird nicht zu einer toten Visitenkarte.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="zeiten">
+      <div class="container section-grid">
+        <div class="section-left">
+          <div class="section-kicker">Öffnungszeiten</div>
+          <h2 class="section-title">Sofort sichtbar. Ohne Rückfragen.</h2>
+          <p class="section-copy">
+            Genau das wollen die Leute wissen. Hat offen oder nicht. Alles andere ist zweitrangig.
+          </p>
+        </div>
+
+        <div class="section-right">
+          <div class="hours-layout">
+            <div class="hours-row">
+              <span>Montag – Sonntag</span>
+              <strong>12:00 – 00:00</strong>
+            </div>
+
+            <div class="hours-row">
+              <span>Paketservice</span>
+              <div class="hours-row-logos">
+                <img src="dhl-logo.png" alt="DHL Logo" />
+                <img src="dpd-logo.png" alt="DPD Logo" />
+                <img src="gls-logo.png" alt="GLS Logo" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="standort">
+      <div class="container section-grid">
+        <div class="section-left">
+          <div class="section-kicker">Standort</div>
+          <h2 class="section-title">Leicht zu finden. Schnell erreichbar.</h2>
+          <p class="section-copy">
+            Wenn der Standortbereich sauber gemacht ist, wird aus einem Seitenbesucher schneller
+            ein echter Kunde.
+          </p>
+        </div>
+
+        <div class="section-right">
+          <div class="location-layout">
+            <div class="location-copy">
+              <div>
+                <h3>HABO Einkaufskiosk</h3>
+                <p>
+                  Alt-Nied 19<br />
+                  65934 Frankfurt am Main
+                </p>
+
+                <div class="location-meta">
+                  <div class="location-meta-item">
+                    <span>Öffnungszeiten</span>
+                    <strong>Montag – Sonntag<br />12:00 – 00:00</strong>
+                  </div>
+
+                  <div class="location-meta-item">
+                    <span>Services</span>
+                    <strong>DHL · DPD · GLS</strong>
+                    <div class="location-service-logos">
+                      <img src="dhl-logo.png" alt="DHL Logo" />
+                      <img src="dpd-logo.png" alt="DPD Logo" />
+                      <img src="gls-logo.png" alt="GLS Logo" />
+                    </div>
+                  </div>
+
+                  <div class="location-meta-item">
+                    <span>Standort</span>
+                    <strong>Alt-Nied 19, 65934 Frankfurt am Main</strong>
+                  </div>
+                </div>
+              </div>
+
+              <div class="hero-actions" style="margin-top: 24px;">
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=Alt-Nied+19,+65934+Frankfurt+am+Main"
+                  class="btn btn-primary"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Route starten
+                </a>
+              </div>
+            </div>
+
+            <div class="map">
+              <iframe
+                src="https://www.google.com/maps?q=Alt-Nied%2019%2C%2065934%20Frankfurt%20am%20Main&output=embed"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Google Maps Karte für HABO Einkaufskiosk">
+              </iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>© 2026 HABO Einkaufskiosk</span>
+      <span>Impressum · Datenschutz</span>
+    </div>
+  </footer>
+</body>
+</html>
