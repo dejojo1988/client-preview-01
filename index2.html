@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HABO Einkaufskiosk | Konzept Variante B</title>
+
+  <style>
+    :root {
+      --bg: #0b0b0c;
+      --surface: rgba(17, 18, 20, 0.82);
+      --surface-2: rgba(24, 26, 29, 0.88);
+      --line: rgba(255, 255, 255, 0.1);
+      --text: #f5f5f5;
+      --muted: #a1a1a1;
+      --accent: #ff6a00;
+      --accent-glow: rgba(255, 106, 0, 0.4);
+      --max-width: 1320px;
+      --radius: 16px;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      --bg-image: url("https://images.unsplash.com/photo-1769765717854-4b40ef3781c4?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: -40px;
+      background-image: var(--bg-image);
+      background-size: cover;
+      background-position: center;
+      filter: blur(22px) brightness(0.28) saturate(0.95);
+      transform: scale(1.08);
+      z-index: -3;
+      pointer-events: none;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at top right, rgba(255, 106, 0, 0.1), transparent 30%),
+        linear-gradient(to bottom, rgba(8, 8, 9, 0.75), rgba(8, 8, 9, 0.92));
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    .container {
+      width: min(var(--max-width), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(11, 11, 12, 0.72);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .topbar-inner {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-mark {
+      width: 12px;
+      height: 12px;
+      background: var(--accent);
+      box-shadow: 0 0 12px var(--accent-glow);
+      flex-shrink: 0;
+    }
+
+    .brand-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .brand-copy strong {
+      font-size: 1rem;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-copy span {
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .nav {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .nav a {
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .nav a:hover {
+      color: var(--accent);
+    }
+
+    .hero {
+      padding: 42px 0 24px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(17, 18, 20, 0.82), rgba(17, 18, 20, 0.72));
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-left {
+      padding: 48px 38px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .hero-kicker {
+      color: var(--accent);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-bottom: 18px;
+      font-weight: bold;
+    }
+
+    .hero-title {
+      font-size: clamp(3rem, 8vw, 6rem);
+      line-height: 0.9;
+      letter-spacing: -0.055em;
+      max-width: 760px;
+    }
+
+    .hero-text {
+      margin-top: 22px;
+      color: var(--muted);
+      max-width: 600px;
+      font-size: 1.02rem;
+      line-height: 1.6;
+    }
+
+    .hero-actions {
+      margin-top: 30px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 20px;
+      border: 1px solid var(--line);
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.2s ease;
+      border-radius: 12px;
+      user-select: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #000;
+      border: none;
+      box-shadow: 0 0 18px var(--accent-glow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(255, 106, 0, 0.5);
+      color: var(--accent);
+    }
+
+    .hero-right {
+      border-left: 1px solid var(--line);
+      min-height: 520px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-image-wrap {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .hero-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: contrast(1.08) brightness(0.82);
+    }
+
+    .hero-image-wrap::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to top, rgba(0, 0, 0, 0.58), rgba(0, 0, 0, 0.08)),
+        linear-gradient(to left, rgba(0, 0, 0, 0.16), transparent 38%);
+    }
+
+    .section {
+      padding: 20px 0 0;
+    }
+
+    .section-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .section-inner {
+      padding: 34px 32px;
+    }
+
+    .section-title {
+      font-size: 2.4rem;
+      margin-bottom: 10px;
+      letter-spacing: -0.04em;
+    }
+
+    .section-copy {
+      color: var(--muted);
+      max-width: 720px;
+      line-height: 1.6;
+    }
+
+    .rows {
+      margin-top: 22px;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 20px;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .row:last-child {
+      border-bottom: none;
+    }
+
+    .row-label {
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .row-text {
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .offers {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+
+    .offer-main {
+      padding: 34px 32px;
+      background: var(--surface-2);
+    }
+
+    .offer-main:first-child {
+      border-right: 1px solid var(--line);
+    }
+
+    .offer-main h3 {
+      font-size: 2.1rem;
+      color: var(--accent);
+      letter-spacing: -0.04em;
+    }
+
+    .offer-price {
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      margin-top: 16px;
+      color: var(--accent);
+      text-shadow: 0 0 15px var(--accent-glow);
+      font-weight: bold;
+      letter-spacing: -0.04em;
+    }
+
+    .offer-note {
+      margin-top: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 420px;
+    }
+
+    .hours-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+
+    .hours-block {
+      padding: 34px 32px;
+    }
+
+    .hours-block:first-child {
+      border-right: 1px solid var(--line);
+    }
+
+    .hours-title {
+      font-size: 2rem;
+      margin-bottom: 14px;
+      letter-spacing: -0.04em;
+    }
+
+    .hours-line {
+      font-size: 1.1rem;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .hours-sub {
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 460px;
+    }
+
+    .map {
+      padding: 20px 0 0;
+    }
+
+    .map-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--surface);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+    }
+
+    .map iframe {
+      width: 100%;
+      height: 420px;
+      border: 0;
+      filter: grayscale(1) contrast(1.15) brightness(0.88);
+      display: block;
+    }
+
+    .footer {
+      padding: 24px 0 36px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 1100px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-right {
+        border-left: none;
+        border-top: 1px solid var(--line);
+        min-height: 360px;
+      }
+
+      .offers,
+      .hours-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .offer-main:first-child,
+      .hours-block:first-child {
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .container {
+        width: min(var(--max-width), calc(100% - 24px));
+      }
+
+      .topbar-inner {
+        min-height: auto;
+        padding: 16px 0;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav {
+        gap: 14px;
+      }
+
+      .hero-left,
+      .section-inner,
+      .offer-main,
+      .hours-block {
+        padding: 26px 20px;
+      }
+
+      .row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .hero-title {
+        font-size: clamp(2.4rem, 12vw, 4rem);
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .hours-title {
+        font-size: 1.7rem;
+      }
+
+      .map iframe {
+        height: 340px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <div class="brand-mark"></div>
+        <div class="brand-copy">
+          <strong>HABO Kiosk</strong>
+          <span>Variante B · Urban</span>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a href="#">Sortiment</a>
+        <a href="#">Paketdienste</a>
+        <a href="#">Angebote</a>
+        <a href="#">Standort</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-left">
+        <div class="hero-kicker">Kiosk + Servicepunkt</div>
+
+        <h1 class="hero-title">Schnell rein. Schnell raus. Alles da.</h1>
+
+        <p class="hero-text">
+          Klare Struktur, starke Präsenz und genau die Infos, die wirklich zählen.
+          So kann ein moderner Kiosk online wirken – direkter, mutiger und deutlich
+          hochwertiger als eine typische Standardseite.
+        </p>
+
+        <div class="hero-actions">
+          <div class="btn btn-primary">Laden ansehen</div>
+          <div class="btn btn-secondary">Standort</div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-image-wrap">
+          <img
+            src="https://images.unsplash.com/photo-1769765717854-4b40ef3781c4?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="Urbanes Kiosk-Motiv"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container section-card">
+      <div class="section-inner">
+        <h2 class="section-title">Sortiment</h2>
+        <p class="section-copy">
+          Das Sortiment wird nicht übererklärt, sondern sauber und direkt präsentiert.
+          Genau das passt zu einem kleinen Kiosk besser als unnötiges Marketing-Gerede.
+        </p>
+
+        <div class="rows">
+          <div class="row">
+            <div class="row-label">Getränke</div>
+            <div class="row-text">Softdrinks, Energy, Wasser und schnelle Kaltgetränke für unterwegs.</div>
+          </div>
+
+          <div class="row">
+            <div class="row-label">Snacks</div>
+            <div class="row-text">Chips, Süßwaren und kleine Impulskäufe, die direkt sichtbar gemacht werden.</div>
+          </div>
+
+          <div class="row">
+            <div class="row-label">Eis</div>
+            <div class="row-text">Saisonal stark, einfach verständlich und online als Kundenmagnet gut inszenierbar.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container section-card">
+      <div class="section-inner">
+        <h2 class="section-title">Paketdienste</h2>
+        <p class="section-copy">
+          Mehr als nur ein Kiosk: Pakete abgeben, abholen oder retournieren –
+          schnell, unkompliziert und ohne lange Wege.
+        </p>
+
+        <div class="rows">
+          <div class="row">
+            <div class="row-label">Annahme</div>
+            <div class="row-text">
+              Pakete bequem abgeben, ohne extra zur Filiale fahren zu müssen.
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="row-label">Abholung</div>
+            <div class="row-text">
+              Bestellungen flexibel abholen – auch abends oder spontan unterwegs.
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="row-label">Retouren</div>
+            <div class="row-text">
+              Rücksendungen direkt vor Ort erledigen, ohne Stress und Wartezeiten.
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="row-label">Service</div>
+            <div class="row-text">
+              Schnelle Abwicklung, kurze Wege und persönlicher Kontakt statt anonymer Station.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container section-card offers">
+      <div class="offer-main">
+        <h3>Wochenangebot</h3>
+        <div class="offer-price">3,50 €</div>
+        <p class="offer-note">
+          Sofort sichtbar, direkt erfassbar und genau der Bereich, der sich wöchentlich
+          pflegen und austauschen lässt.
+        </p>
+      </div>
+
+      <div class="offer-main">
+        <h3>Snack + Drink</h3>
+        <p class="offer-note">
+          Perfekt für unterwegs. Solche Kombis funktionieren online gut, weil sie ohne
+          viel Text direkt verstanden werden.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container section-card hours-grid">
+      <div class="hours-block">
+        <h2 class="hours-title">Öffnungszeiten</h2>
+        <p class="hours-line">Mo – So · 12:00 – 00:00</p>
+        <p class="hours-sub">
+          Klar platziert, sofort lesbar und ohne Umwege erreichbar. Genau so muss das
+          auf einer Kiosk-Seite aussehen.
+        </p>
+      </div>
+
+      <div class="hours-block">
+        <h2 class="hours-title">Warum das wirkt</h2>
+        <p class="hours-sub">
+          Der geblurrte Hintergrund gibt Tiefe und Atmosphäre, ohne den Content zu zerstören.
+          Dadurch wirkt die Seite präsenter und weniger austauschbar.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="map">
+    <div class="container map-card">
+      <iframe
+        src="https://www.google.com/maps?q=Frankfurt&output=embed"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      Variante B · Präsentationsdesign
+    </div>
+  </footer>
+
+</body>
+</html>
